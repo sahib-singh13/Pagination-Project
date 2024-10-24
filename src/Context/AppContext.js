@@ -3,6 +3,8 @@ import {baseUrl} from "../baseUrl";
 
 export const AppContext = createContext();
 
+//remember API call should be done by useEffect
+
 function AppContextProvider({ children }) {
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -14,8 +16,6 @@ function AppContextProvider({ children }) {
         let url = `${baseUrl}?page=${page}`;
         console.log(url);
         try {
-           
-    
             const result = await fetch(url);
             const data = await result.json();
             setPage(data.page);
@@ -27,7 +27,7 @@ function AppContextProvider({ children }) {
             setPosts([]);
             setTotalPages(null);
         }
-        setLoading(false);
+        setLoading(false);  
     }
 
     function handlePageChange(page)
